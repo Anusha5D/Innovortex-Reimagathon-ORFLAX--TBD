@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ORFLAX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #5c1010;
+        }
+
+        header {
+            background-color: #FFFFDD;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            height: 85px;
+            margin-right: 20px;
+        }
+
+        .header-text {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: #5c1010;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+
+        }
+
+        .header-text h2 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: #343a40;
+            font-weight: normal;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            background-color: #343a40;
+            overflow: hidden;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+
+        .fblogo {
+            height: 18px;
+            vertical-align: middle;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+
+
+
+        .social-icons {
+            display: flex;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            gap: 15px;
+            z-index: 1000;
+        }
+        .social-icons {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.social-icons a {
+    color: #343a40;
+    font-size: 24px;
+    transition: color 0.3s;
+    padding: 5px;
+}
+
+.social-icons a:hover {
+    color: #ffc107;
+}
+
+        .social-icons a {
+            color: #343a40;
+            font-size: 24px;
+            transition: color 0.3s;
+            padding: 5px;
+        }
+
+        .social-icons a:hover {
+            color: #ffc107;
+        }
+
+        .contact-icons {
+            position: fixed;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .contact-icon-main {
+            color: #343a40;
+            background-color: #ffc107;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-icons a {
+            color: #343a40;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            background-color: #343a40;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .contact-icons a:hover {
+            background-color: #ffc107;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .hero {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+    .imgs {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+
+}
+
+.imgs li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.imgs img {
+    width: 200px; /* Adjust image size as needed */
+    width: auto;
+    height: 300px;
+}
+
+
+
+    .pts {
+        padding-top: 20px;
+    }
+
+    .points {
+        font-size: medium;
+        /* padding-top: 15px; */
+        padding-bottom: 55px;
+    }
+
+    .pointers_head {
+        font-size: x-large;
+        padding-top: 20px;
+
+    }
+
+    .about_para {
+        font-size: medium;
+        padding-top: 15px;
+    }
+
+    .main {
+        line-height: 20px;
+        letter-spacing: 2px;
+        padding-left: 25px;
+        padding-right: 25px;
+        color: rgba(73, 73, 73, 0.92);
+    }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <img src="logo.jpg" alt="ORFLAX Logo" class="logo">
+        <div class="header-text">
+            <h1>ORFLAX</h1>
+            <h2>German Technology Wires and Cables</h2>
+        </div>
+
+    </header>
+
+    <nav aria-label="Main Navigation">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="prodcatalogue.html">Products</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+            <div class="social-icons">
+                <a href="#">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/768px-Facebook_f_logo_%282021%29.svg.png?20210818083032" alt="fb logo" class="fblogo">
+                </a>
+            </div>
+            </ul>
+    </nav>
+
+    <div class="hero">
+        <video autoplay muted loop>
+            <source src="https://orflaxindia.com/wp-content/uploads/2023/09/pexels-kelly-lacy-6079426-2160p.mp4" type="video/mp4">
+        </video>
+        <h1 class="heading">About Us</h1>
+    </div>
+
+    
+
+
+
+    <div class="main">
+        <h1 class="head1">ORFLAX: Your Partner in Electrical Excellence</h1>
+        <h2 class=" about_para">
+            Orflax India Pvt. Ltd. is a North Indian company specializing in the manufacture and supply of electric
+            wires and cables under the "Orflax" brand. With over 15 years of experience, they produce power and control
+            cables, lighting cables, and industrial cables, adhering to ISO 9001-2015 standards. Their products undergo
+            rigorous quality checks, and they are known for innovations like triple-layer coating. The company serves a
+            wide range of customers and has earned several industry awards.
+        </h2>
+        <ul class="imgs">
+            <li><img src="cable.jpg" alt="Cable Image"></li>
+            <li><img src="wire.jpeg" alt="Wire Image"></li>
+            <li><img src="bluewire.jpg" alt="Blue Wire Image"></li>
+        </ul>
+        <h2 class="pointers_head">Why Choose ORFLAX?</h2>
+        <ul class="points">
+            <li class="pts">ISO 9001:2015 Certified Quality: Our commitment to quality is demonstrated by our adherence
+                to the rigorous standards outlined in ISO 9001:2015.
+                Our quality management system ensures consistent quality throughout our operations, from raw material
+                procurement to final product delivery.
+                By meeting international quality standards, we consistently deliver products that exceed customer
+                expectations.</li>
+            <li class="pts">Comprehensive Product Range: Our wide range of electric wires and cables caters to various
+                industries and applications, from residential and commercial buildings to industrial facilities.
+                We offer products suitable for different power requirements, voltage levels, and environmental
+                conditions.
+                Customers can find all their electrical wire and cable needs under one roof, simplifying their
+                procurement process.</li>
+            <li class="pts">Triple Layer Coating: The triple layer coating provides superior protection against
+                corrosion, abrasion, and other environmental factors.
+                This advanced coating ensures that our cables have a longer lifespan and can withstand demanding
+                conditions.
+                The triple layer coating enhances the overall reliability and performance of our cables</li>
+            <li class="pts">15 Years of Excellence: Our extensive experience in the electrical industry has equipped us
+                with valuable knowledge and insights.
+                Our 15-year history of successful operations demonstrates our ability to deliver quality products and
+                services.
+                Our long-standing presence in the market has earned us the trust and confidence of our customers.</li>
+            <li class="pts">Customization and Quality Assurance: We work closely with customers to understand their
+                specific needs and provide customized solutions.
+                Our products undergo stringent quality testing at every stage of the manufacturing process to ensure
+                they meet the highest standards.
+                We are committed to continually improving our processes and products to meet evolving customer
+                requirements.</li>
+            <li class="pts">North Indian Leader: Our position as a leading business group in North India gives us a deep
+                understanding of local market dynamics.
+                We leverage our local expertise to provide efficient and effective solutions to our customers.
+                Our strong network of suppliers and distributors enables us to offer competitive pricing and timely
+                delivery.</li>
+
+        </ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ORFLAX. All rights reserved.</p>
+    </footer>
+
+    <div class="contact-icons">
+        <a href="mailto:info@example.com" class="contact-icon-main">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="tel:+1234567890">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+
+</body>
+
+
+</html>

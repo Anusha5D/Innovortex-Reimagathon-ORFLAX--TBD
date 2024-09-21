@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ORFLAX Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .chat-container {
+            width: 400px;
+            max-width: 100%;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #343a40;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f0f0f0;
+        }
+        .chat-message {
+            margin-bottom: 15px;
+        }
+        .chat-message.user {
+            text-align: right;
+        }
+        .chat-message p {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        .chat-message.user p {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .chat-message.bot p {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .chat-footer {
+            padding: 10px;
+            background-color: #f4f4f9;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .chat-footer input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .chat-footer button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .chat-footer button:hover {
+            background-color: #218838;
+        }
+
+        /* Button Styles */
+        .question-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .question-buttons button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .question-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .chat-container {
+                width: 95%;
+                margin: 20px auto;
+            }
+            .chat-header {
+                font-size: 16px;
+                padding: 10px;
+            }
+            .chat-footer input[type="text"], 
+            .chat-footer button {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .question-buttons button {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            Chat with ORFLAX
+        </div>
+        <div class="chat-body" id="chat-body">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="user-input" placeholder="Type your message here..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <div class="question-buttons" id="question-buttons">
+            <!-- Predefined question buttons -->
+        </div>
+    </div>
+
+    <script>
+        // ORFLAX Chatbot Responses
+        const botResponses = {
+            "hello": "Hello! Welcome to ORFLAX. How can we assist you today?",
+            "hi": "Hi! How can ORFLAX help you with your cable and wire needs?",
+            "what products do you offer": "We offer a wide range of cables including power cables, control cables, and industrial wires. Would you like more details on a specific product?",
+            "can you tell me about your services": "At ORFLAX, we provide premium-quality cables and wiring solutions for industrial, commercial, and residential needs.",
+            "pricing": "Pricing varies depending on the product and quantity. Can you let us know which type of cable you're interested in?",
+            "contact information": "You can reach ORFLAX at +919313493405/+919313666292 or email us at Connect@orflaxindia.com.",
+            "location": "We are located at B-42/15 Jhilmil Industrial Area, G.T. Road, Delhi 110 095. Visit us or reach out for any inquiries.",
+            "bye": "Thank you for visiting ORFLAX! Have a great day.",
+            "default": "I'm sorry, I don't understand that. Can you please ask about our products, services, or contact information?"
+        };
+
+        const predefinedQuestions = [
+            "Hello",
+            "What products do you offer",
+            "Can you tell me about your services",
+            "Pricing",
+            "Contact information",
+            "Location",
+            "Bye"
+        ];
+
+        // Generate question buttons dynamically
+        function createQuestionButtons() {
+            const questionContainer = document.getElementById("question-buttons");
+            predefinedQuestions.forEach(question => {
+                const button = document.createElement("button");
+                button.textContent = question;
+                button.onclick = () => sendMessage(question.toLowerCase());
+                questionContainer.appendChild(button);
+            });
+        }
+
+        function sendMessage(inputValue) {
+            const userInput = inputValue || document.getElementById("user-input").value.trim().toLowerCase();
+            if (userInput === "") return;
+
+            addMessage("user", userInput);
+            setTimeout(() => {
+                addMessage("bot", getBotResponse(userInput));
+            }, 500);
+            document.getElementById("user-input").value = "";
+        }
+
+        function addMessage(sender, message) {
+            const chatBody = document.getElementById("chat-body");
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("chat-message", sender);
+            const messagePara = document.createElement("p");
+            messagePara.textContent = message;
+            messageDiv.appendChild(messagePara);
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function getBotResponse(userInput) {
+            return botResponses[userInput] || botResponses["default"];
+        }
+
+        // Initialize question buttons when the page loads
+        window.onload = createQuestionButtons;
+    </script>
+</body>
+</html>
